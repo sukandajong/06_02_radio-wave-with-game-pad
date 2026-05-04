@@ -1,6 +1,6 @@
-// iBIT.set_motor(ibitMotorCH.M1, ibitMotor.BACKWARD, 0)
-// iBIT.set_motor(ibitMotorCH.M2, ibitMotor.FORWARD, 0)
-radio.onReceivedString(function (receivedString) {
+//  iBIT.set_motor(ibitMotorCH.M1, ibitMotor.BACKWARD, 0)
+//  iBIT.set_motor(ibitMotorCH.M2, ibitMotor.FORWARD, 0)
+radio.onReceivedString(function on_received_string(receivedString: string) {
     if (receivedString == "C") {
         basic.showIcon(IconNames.Heart)
     } else if (receivedString == "W") {
@@ -16,15 +16,16 @@ radio.onReceivedString(function (receivedString) {
     } else if (receivedString == "S") {
         basic.showIcon(IconNames.SmallSquare)
     }
+    
 })
 let joy_y = 0
 let joy_x = 0
 let is_active = false
-pins.digitalWritePin(DigitalPin.P0, 1)
 radio.setGroup(1)
 pins.setPull(DigitalPin.P13, PinPullMode.PullUp)
 pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
-basic.forever(function () {
+basic.forever(function on_forever() {
+    
     if (pins.digitalReadPin(DigitalPin.P13) == 0) {
         is_active = true
         basic.showIcon(IconNames.Heart)
@@ -33,6 +34,7 @@ basic.forever(function () {
         basic.showIcon(IconNames.No)
         radio.sendString("W")
     }
+    
     if (is_active) {
         joy_x = pins.analogReadPin(AnalogReadWritePin.P2)
         joy_y = pins.analogReadPin(AnalogReadWritePin.P1)
@@ -52,5 +54,7 @@ basic.forever(function () {
             radio.sendString("S")
             basic.showIcon(IconNames.SmallSquare)
         }
+        
     }
+    
 })

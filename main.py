@@ -20,11 +20,10 @@ radio.on_received_string(on_received_string)
 
 joy_y = 0
 joy_x = 0
-pins.digital_write_pin(DigitalPin.P0, 1)
+is_active = False
 radio.set_group(1)
 pins.set_pull(DigitalPin.P13, PinPullMode.PULL_UP)
 pins.set_pull(DigitalPin.P16, PinPullMode.PULL_UP)
-is_active = False
 
 def on_forever():
     global is_active, joy_x, joy_y
